@@ -1,6 +1,8 @@
 # Test Report Analyzer
 
 A powerful command-line tool for analyzing Android and Flutter test reports using AI to provide insights, root cause analysis, and suggested fixes for test failures. The analyzer uses OpenAI or Anthropic APIs to generate detailed analysis of test failures, making it easier to understand and fix failing tests.
+![image](https://github.com/user-attachments/assets/7a631a6c-13ff-46da-935c-9315f04d4ec1)
+
 
 ## Quick Start
 
