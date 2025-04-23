@@ -160,10 +160,8 @@ class TestReportParser {
     // Try to find test name
     for (final selector in format.testNameSelectors) {
       final nameElement = element.querySelector(selector) ?? element;
-      if (nameElement != null) {
-        testName = nameElement.text.trim();
-        if (testName.isNotEmpty) break;
-      }
+      testName = nameElement.text.trim();
+      if (testName.isNotEmpty) break;
     }
 
     // Try to find error message
