@@ -1,0 +1,21 @@
+# Build artifacts
+.dart_tool/
+build/
+*.dill
+*.snapshot
+
+# IDE files
+.idea/
+*.iml
+.DS_Store
+
+# Test reports
+*.html
+*.xml
+
+# Git
+.git/
+.gitignore
+
+# Example output
+example/output/ 

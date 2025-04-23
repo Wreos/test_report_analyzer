@@ -1,0 +1,27 @@
+name: test_report_analyzer
+description: A powerful tool for analyzing Android and Flutter test reports using AI to provide insights, root cause analysis, and suggested fixes for test failures.
+version: 1.0.0
+repository: https://github.com/wreos/test_report_analyzer
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  html: ^0.15.0
+  http: ^1.1.0
+  meta: ^1.9.0
+  path: ^1.8.0
+  yaml: ^3.1.0
+  logging: ^1.2.0
+  retry: ^3.1.0
+  collection: ^1.17.0
+  args: ^2.4.0
+
+dev_dependencies:
+  lints: ^3.0.0
+  test: ^1.24.0
+  mockito: ^5.4.0
+  build_runner: ^2.4.0
+
+executables:
+  test_report_analyzer: test_report_analyzer 
