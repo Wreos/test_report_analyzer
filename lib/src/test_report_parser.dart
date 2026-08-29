@@ -197,7 +197,8 @@ class TestReportParser {
 
   String _determineTestClass(Element element) {
     // Try to determine if this is a tool failure or test failure
-    final isToolFailure = element.parent?.id == 'tab0' ||
+    final isToolFailure =
+        element.parent?.id == 'tab0' ||
         element.text.toLowerCase().contains('install') ||
         element.text.toLowerCase().contains('setup') ||
         element.text.toLowerCase().contains('device');

@@ -67,7 +67,7 @@ dart run test_report_analyzer
 
 ## Prerequisites
 
-You'll need either an OpenAI API key or an Anthropic API key to use the analyzer. You can provide these through:
+You'll need Dart 3.11 or later and either an OpenAI API key or an Anthropic API key to use the analyzer. You can provide the API key through:
 - Command line arguments: `--openai-key` or `--anthropic-key`
 - Environment variables: `OPENAI_API_KEY` or `ANTHROPIC_API_KEY`
 

@@ -56,10 +56,12 @@ class Config {
     return Config.validated(
       openAiApiKey: openAiApiKey,
       openAiModel: openAiModel ?? 'gpt-4-turbo-preview',
-      openAiApiUrl: openAiApiUrl ?? 'https://api.openai.com/v1/chat/completions',
+      openAiApiUrl:
+          openAiApiUrl ?? 'https://api.openai.com/v1/chat/completions',
       anthropicApiKey: anthropicApiKey,
       anthropicModel: anthropicModel ?? 'claude-3-opus-20240229',
-      anthropicApiUrl: anthropicApiUrl ?? 'https://api.anthropic.com/v1/messages',
+      anthropicApiUrl:
+          anthropicApiUrl ?? 'https://api.anthropic.com/v1/messages',
       timeout: int.tryParse(timeoutStr ?? '') ?? 30,
       maxRetries: int.tryParse(maxRetriesStr ?? '') ?? 3,
       retryDelay: int.tryParse(retryDelayStr ?? '') ?? 1,
@@ -84,10 +86,15 @@ class Config {
     return Config(
       openAiApiKey: openai['api_key']?.toString() ?? '',
       openAiModel: openai['model']?.toString() ?? 'gpt-4-turbo-preview',
-      openAiApiUrl: openai['api_url']?.toString() ?? 'https://api.openai.com/v1/chat/completions',
+      openAiApiUrl:
+          openai['api_url']?.toString() ??
+          'https://api.openai.com/v1/chat/completions',
       anthropicApiKey: anthropic['api_key']?.toString() ?? '',
-      anthropicModel: anthropic['model']?.toString() ?? 'claude-3-opus-20240229',
-      anthropicApiUrl: anthropic['api_url']?.toString() ?? 'https://api.anthropic.com/v1/messages',
+      anthropicModel:
+          anthropic['model']?.toString() ?? 'claude-3-opus-20240229',
+      anthropicApiUrl:
+          anthropic['api_url']?.toString() ??
+          'https://api.anthropic.com/v1/messages',
       timeout: yaml['timeout'] as int? ?? 30,
       maxRetries: yaml['max_retries'] as int? ?? 3,
       retryDelay: yaml['retry_delay'] as int? ?? 1,

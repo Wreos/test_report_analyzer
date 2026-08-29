@@ -32,8 +32,12 @@ class ReportParser {
     final toolFailureElements = document.querySelectorAll('.tool-failure');
 
     for (final element in toolFailureElements) {
-      final name = element.querySelector('.failure-name')?.text ?? 'Unknown Tool Failure';
-      final details = element.querySelector('.failure-details')?.text ?? 'No details available';
+      final name =
+          element.querySelector('.failure-name')?.text ??
+          'Unknown Tool Failure';
+      final details =
+          element.querySelector('.failure-details')?.text ??
+          'No details available';
 
       failures.add(
         TestFailure(
@@ -54,8 +58,12 @@ class ReportParser {
     final gradleFailureElements = document.querySelectorAll('.gradle-failure');
 
     for (final element in gradleFailureElements) {
-      final name = element.querySelector('.failure-name')?.text ?? 'Unknown Gradle Failure';
-      final details = element.querySelector('.failure-details')?.text ?? 'No details available';
+      final name =
+          element.querySelector('.failure-name')?.text ??
+          'Unknown Gradle Failure';
+      final details =
+          element.querySelector('.failure-details')?.text ??
+          'No details available';
 
       failures.add(
         TestFailure(
@@ -98,10 +106,16 @@ class ReportParser {
     final failureElements = document.querySelectorAll('.test-failure');
 
     for (final element in failureElements) {
-      final testClass = element.querySelector('.test-class')?.text ?? 'Unknown Class';
-      final testMethod = element.querySelector('.test-method')?.text ?? 'Unknown Method';
-      final name = element.querySelector('.failure-name')?.text ?? 'Unknown Test Failure';
-      final details = element.querySelector('.failure-details')?.text ?? 'No details available';
+      final testClass =
+          element.querySelector('.test-class')?.text ?? 'Unknown Class';
+      final testMethod =
+          element.querySelector('.test-method')?.text ?? 'Unknown Method';
+      final name =
+          element.querySelector('.failure-name')?.text ??
+          'Unknown Test Failure';
+      final details =
+          element.querySelector('.failure-details')?.text ??
+          'No details available';
       final stackTrace = element.querySelector('.stack-trace')?.text ?? '';
 
       failures.add(
@@ -135,7 +149,8 @@ class ReportParser {
     final failureElements = document.querySelectorAll('.test-result.failed');
 
     for (final element in failureElements) {
-      final testName = element.querySelector('.test-name')?.text ?? 'Unknown Test';
+      final testName =
+          element.querySelector('.test-name')?.text ?? 'Unknown Test';
       final errorText = element.querySelector('.stacktrace')?.text ?? '';
 
       // Split error text into message and stack trace

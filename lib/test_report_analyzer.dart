@@ -1,7 +1,5 @@
-/// A powerful tool for analyzing Android and Flutter test reports using AI
-/// to provide insights, root cause analysis, and suggested fixes for test failures.
-library test_report_analyzer;
-
+// A powerful tool for analyzing Android and Flutter test reports using AI
+// to provide insights, root cause analysis, and suggested fixes for test failures.
 import 'dart:io';
 import 'package:html/parser.dart' as html_parser;
 import 'package:path/path.dart' as p;
@@ -20,10 +18,7 @@ class TestReportAnalyzer {
   ///
   /// [apiKey] is the API key for either OpenAI or Anthropic.
   /// [useAnthropicInstead] determines which AI service to use (defaults to OpenAI).
-  TestReportAnalyzer({
-    required this.apiKey,
-    this.useAnthropicInstead = false,
-  });
+  TestReportAnalyzer({required this.apiKey, this.useAnthropicInstead = false});
 
   /// Analyzes test reports in the specified directory
   Future<AnalysisResults> analyzeReports({
@@ -82,10 +77,7 @@ class TestReportAnalyzer {
       }
     }
 
-    return AnalysisResults(
-      failures: allFailures,
-      analyses: analyses,
-    );
+    return AnalysisResults(failures: allFailures, analyses: analyses);
   }
 
   /// Generates an HTML report from the analysis results.
@@ -103,7 +95,7 @@ class TestReportAnalyzer {
         'tests': '${results.failures.length}',
         'failures': '${results.failures.length}',
         'successRate': '0%',
-        'duration': 'N/A'
+        'duration': 'N/A',
       },
       failures: results.failures,
       aiAnalyses: results.analyses,
@@ -197,8 +189,8 @@ class TestReportAnalyzer {
 
     final hasFailures =
         document.body?.text.toLowerCase().contains('failed') == true ||
-            document.querySelector('.failed') != null ||
-            document.querySelector('.error') != null;
+        document.querySelector('.failed') != null ||
+        document.querySelector('.error') != null;
 
     if (hasFailures) {
       return [testFilePath];
@@ -213,8 +205,6 @@ class AnalysisResults {
   final List<TestFailure> failures;
   final List<FailureAnalysis> analyses;
 
-  AnalysisResults({
-    required this.failures,
-    List<FailureAnalysis>? analyses,
-  }) : analyses = analyses ?? [];
+  AnalysisResults({required this.failures, List<FailureAnalysis>? analyses})
+    : analyses = analyses ?? [];
 }

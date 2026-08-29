@@ -38,10 +38,7 @@ class OpenAiService implements AiService {
                 'content':
                     'You are a helpful test analysis assistant. Analyze test failures and provide root cause analysis and suggested fixes. Your response must be valid JSON.',
               },
-              {
-                'role': 'user',
-                'content': prompt,
-              },
+              {'role': 'user', 'content': prompt},
             ],
             'temperature': 0.7,
             'response_format': {'type': 'json_object'},
@@ -69,7 +66,7 @@ class OpenAiService implements AiService {
           rootCause: 'Failed to parse AI response: $e',
           suggestedFix: 'Please check the test failure manually.',
           additionalNotes: [
-            'AI analysis failed due to invalid response format'
+            'AI analysis failed due to invalid response format',
           ],
         );
       }
@@ -129,10 +126,7 @@ class AnthropicService implements AiService {
           body: jsonEncode({
             'model': model,
             'messages': [
-              {
-                'role': 'user',
-                'content': prompt,
-              },
+              {'role': 'user', 'content': prompt},
             ],
             'temperature': 0.7,
           }),
@@ -158,7 +152,7 @@ class AnthropicService implements AiService {
           rootCause: 'Failed to parse AI response: $e',
           suggestedFix: 'Please check the test failure manually.',
           additionalNotes: [
-            'AI analysis failed due to invalid response format'
+            'AI analysis failed due to invalid response format',
           ],
         );
       }
