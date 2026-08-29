@@ -3,13 +3,18 @@ class FailureAnalysis {
   final String suggestedFix;
   final List<String>? additionalNotes;
 
-  FailureAnalysis({required this.rootCause, required this.suggestedFix, this.additionalNotes});
+  FailureAnalysis({
+    required this.rootCause,
+    required this.suggestedFix,
+    this.additionalNotes,
+  });
 
   factory FailureAnalysis.fromJson(Map<String, dynamic> json) {
     return FailureAnalysis(
       rootCause: json['root_cause'] as String,
       suggestedFix: json['suggested_fix'] as String,
-      additionalNotes: (json['additional_notes'] as List<dynamic>?)?.cast<String>(),
+      additionalNotes: (json['additional_notes'] as List<dynamic>?)
+          ?.cast<String>(),
     );
   }
 

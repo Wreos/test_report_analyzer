@@ -54,7 +54,8 @@ class OutputGenerator {
     buffer.writeln('<head>');
     buffer.writeln('  <meta charset="UTF-8">');
     buffer.writeln(
-        '  <meta name="viewport" content="width=device-width, initial-scale=1.0">');
+      '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+    );
     buffer.writeln('  <title>Test Analysis Report</title>');
     buffer.writeln('  <style>');
     _writeStyles(buffer);
@@ -334,22 +335,22 @@ class OutputGenerator {
       {
         'label': 'Total Tests',
         'value': summary['tests'],
-        'color': 'var(--primary)'
+        'color': 'var(--primary)',
       },
       {
         'label': 'Failures',
         'value': summary['failures'],
-        'color': 'var(--error)'
+        'color': 'var(--error)',
       },
       {
         'label': 'Success Rate',
         'value': summary['successRate'],
-        'color': 'var(--success)'
+        'color': 'var(--success)',
       },
       {
         'label': 'Duration',
         'value': summary['duration'],
-        'color': 'var(--text-primary)'
+        'color': 'var(--text-primary)',
       },
     ];
 
@@ -499,8 +500,9 @@ ${_escapeHtml(failure.stackTrace)}</code></pre>
       return '';
     }
 
-    final items =
-        notes.map((note) => '<li>${_escapeHtml(note)}</li>').join('\n');
+    final items = notes
+        .map((note) => '<li>${_escapeHtml(note)}</li>')
+        .join('\n');
     return '''
       <div class="additional-notes">
         <h4>Additional Notes</h4>

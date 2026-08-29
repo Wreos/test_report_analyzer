@@ -76,8 +76,8 @@ Future<List<String>> getFailedTestFiles(String testFilePath) async {
 
   final hasFailures =
       document.body?.text.toLowerCase().contains('failed') == true ||
-          document.querySelector('.failed') != null ||
-          document.querySelector('.error') != null;
+      document.querySelector('.failed') != null ||
+      document.querySelector('.error') != null;
 
   if (hasFailures) {
     return [testFilePath];
@@ -89,20 +89,35 @@ Future<List<String>> getFailedTestFiles(String testFilePath) async {
 // --- Main Execution Logic ---
 void main(List<String> arguments) async {
   final parser = ArgParser()
-    ..addOption('reports-path',
-        help: 'Path to the test reports directory',
-        defaultsTo: 'build/app/reports/androidTests/connected/debug/flavors')
-    ..addOption('flavor',
-        help: 'Build flavor to analyze (e.g., qa, dev, prod)', defaultsTo: 'qa')
-    ..addOption('openai-key',
-        help: 'OpenAI API key (optional if anthropic-key is provided)')
-    ..addOption('anthropic-key',
-        help: 'Anthropic API key (optional if openai-key is provided)')
-    ..addOption('output',
-        help: 'Path to save the analysis report',
-        defaultsTo: 'ai_analysis_report.html')
-    ..addFlag('help',
-        abbr: 'h', help: 'Show this help message', negatable: false)
+    ..addOption(
+      'reports-path',
+      help: 'Path to the test reports directory',
+      defaultsTo: 'build/app/reports/androidTests/connected/debug/flavors',
+    )
+    ..addOption(
+      'flavor',
+      help: 'Build flavor to analyze (e.g., qa, dev, prod)',
+      defaultsTo: 'qa',
+    )
+    ..addOption(
+      'openai-key',
+      help: 'OpenAI API key (optional if anthropic-key is provided)',
+    )
+    ..addOption(
+      'anthropic-key',
+      help: 'Anthropic API key (optional if openai-key is provided)',
+    )
+    ..addOption(
+      'output',
+      help: 'Path to save the analysis report',
+      defaultsTo: 'ai_analysis_report.html',
+    )
+    ..addFlag(
+      'help',
+      abbr: 'h',
+      help: 'Show this help message',
+      negatable: false,
+    )
     ..addFlag('version', help: 'Show version', negatable: false);
 
   ArgResults args;
@@ -159,10 +174,7 @@ void main(List<String> arguments) async {
     }
 
     print('Generating report...');
-    await analyzer.generateReport(
-      results: results,
-      outputPath: outputPath,
-    );
+    await analyzer.generateReport(results: results, outputPath: outputPath);
 
     print('\nAnalysis complete! Report saved to: $outputPath');
 
@@ -172,9 +184,11 @@ void main(List<String> arguments) async {
     for (final failure in results.failures) {
       print('\nTest: ${failure.testName}');
       print(
-          'Root cause: ${failure.analysis?.rootCause ?? 'No root cause analysis available'}');
+        'Root cause: ${failure.analysis?.rootCause ?? 'No root cause analysis available'}',
+      );
       print(
-          'Suggested fix: ${failure.analysis?.suggestedFix ?? 'No suggested fix available'}');
+        'Suggested fix: ${failure.analysis?.suggestedFix ?? 'No suggested fix available'}',
+      );
     }
   } catch (e, stackTrace) {
     print('Error analyzing test reports: $e');
@@ -189,5 +203,6 @@ void printUsage(ArgParser parser) {
   print(parser.usage);
   print('\nExample:');
   print(
-      '  dart run test_report_analyzer --reports-path path/to/reports --flavor qa --openai-key YOUR_API_KEY');
+    '  dart run test_report_analyzer --reports-path path/to/reports --flavor qa --openai-key YOUR_API_KEY',
+  );
 }
