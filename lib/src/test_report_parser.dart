@@ -5,6 +5,7 @@ import 'models/test_failure.dart';
 /// Configuration for different test report formats
 class TestReportFormat {
   final List<String> summarySelectors;
+  final List<String> failureCountSelectors;
   final List<String> failureSelectors;
   final List<String> errorMessageSelectors;
   final List<String> stackTraceSelectors;
@@ -12,6 +13,7 @@ class TestReportFormat {
 
   const TestReportFormat({
     required this.summarySelectors,
+    this.failureCountSelectors = const [],
     required this.failureSelectors,
     required this.errorMessageSelectors,
     required this.stackTraceSelectors,
@@ -27,6 +29,12 @@ class TestReportFormat {
       '[data-test-count]',
       '.counter',
       '.infoBox .counter',
+    ],
+    failureCountSelectors: [
+      '[data-failure-count]',
+      '#failures .counter',
+      '.failures .counter',
+      '.test-summary .failures',
     ],
     failureSelectors: [
       '.failed',
@@ -118,7 +126,7 @@ class TestReportParser {
     }
 
     // Try to find failure count
-    for (final selector in format.failureSelectors) {
+    for (final selector in format.failureCountSelectors) {
       final element = document.querySelector(selector);
       if (element != null) {
         final text = element.text.replaceAll(RegExp(r'[^\d.]'), '');
@@ -136,12 +144,16 @@ class TestReportParser {
 
   List<TestFailure> _parseFailures(Document document) {
     final failures = <TestFailure>[];
+    final seenElements = <Element>{};
 
     // Find all potential failure containers
     for (final failureSelector in format.failureSelectors) {
       final failureElements = document.querySelectorAll(failureSelector);
 
       for (final element in failureElements) {
+        if (!seenElements.add(element)) {
+          continue;
+        }
         final failure = _extractFailureInfo(element);
         if (failure != null) {
           failures.add(failure);
@@ -209,9 +221,16 @@ class TestReportParser {
     // Try to extract method name from test name
     if (testName.contains('.')) {
       return testName.split('.').last;
-    } else if (testName.contains('test')) {
-      return testName.toLowerCase().contains('setup') ? 'setup' : 'execution';
     }
+
+    final normalizedName = testName.toLowerCase();
+    if (normalizedName.contains('setup')) {
+      return 'setup';
+    }
+    if (normalizedName.contains('test')) {
+      return 'execution';
+    }
+
     return 'execution';
   }
 

@@ -12,10 +12,11 @@ build/
 # Test reports
 *.html
 *.xml
+!test/fixtures/*.html
 
 # Git
 .git/
 .gitignore
 
 # Example output
-example/output/ 
+example/output/

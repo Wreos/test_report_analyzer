@@ -12,19 +12,21 @@ class OpenAiService implements AiService {
   final String apiKey;
   final String model;
   final String apiUrl;
+  final http.Client? _client;
 
   OpenAiService({
     required this.apiKey,
     this.model = 'gpt-4-turbo-preview',
     this.apiUrl = 'https://api.openai.com/v1/chat/completions',
-  });
+    http.Client? client,
+  }) : _client = client;
 
   @override
   Future<FailureAnalysis> analyzeFailure(TestFailure failure) async {
     try {
       final prompt = _buildPrompt(failure);
       final response = await retry(
-        () => http.post(
+        () => _post(
           Uri.parse(apiUrl),
           headers: {
             'Content-Type': 'application/json',
@@ -79,6 +81,18 @@ class OpenAiService implements AiService {
     }
   }
 
+  Future<http.Response> _post(
+    Uri url, {
+    required Map<String, String> headers,
+    required String body,
+  }) {
+    final client = _client;
+    if (client != null) {
+      return client.post(url, headers: headers, body: body);
+    }
+    return http.post(url, headers: headers, body: body);
+  }
+
   String _buildPrompt(TestFailure failure) {
     return '''
 Please analyze this test failure and provide a JSON response with root cause analysis and suggested fix.
@@ -104,19 +118,21 @@ class AnthropicService implements AiService {
   final String apiKey;
   final String model;
   final String apiUrl;
+  final http.Client? _client;
 
   AnthropicService({
     required this.apiKey,
     this.model = 'claude-3-opus-20240229',
     this.apiUrl = 'https://api.anthropic.com/v1/messages',
-  });
+    http.Client? client,
+  }) : _client = client;
 
   @override
   Future<FailureAnalysis> analyzeFailure(TestFailure failure) async {
     try {
       final prompt = _buildPrompt(failure);
       final response = await retry(
-        () => http.post(
+        () => _post(
           Uri.parse(apiUrl),
           headers: {
             'Content-Type': 'application/json',
@@ -163,6 +179,18 @@ class AnthropicService implements AiService {
         additionalNotes: ['AI analysis failed due to an error'],
       );
     }
+  }
+
+  Future<http.Response> _post(
+    Uri url, {
+    required Map<String, String> headers,
+    required String body,
+  }) {
+    final client = _client;
+    if (client != null) {
+      return client.post(url, headers: headers, body: body);
+    }
+    return http.post(url, headers: headers, body: body);
   }
 
   String _buildPrompt(TestFailure failure) {
