@@ -355,10 +355,11 @@ class OutputGenerator {
     ];
 
     for (final item in summaryItems) {
+      final value = item['value'] ?? 'N/A';
       buffer.writeln('''
         <div class="summary-card">
           <h3>${item['label']}</h3>
-          <div class="value" style="color: ${item['color']}">${item['value'] ?? 'N/A'}</div>
+          <div class="value" style="color: ${item['color']}">${_escapeHtml(value)}</div>
         </div>
       ''');
     }

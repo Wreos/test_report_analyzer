@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Android connected test report</title>
+</head>
+<body>
+  <section class="test-summary">
+    <span class="summary-value">4 tests</span>
+    <span data-failure-count="2">2 failures</span>
+  </section>
+
+  <article class="test-result failed">
+    <h3 class="test-name">com.example.LoginTest.invalidCredentials</h3>
+    <div class="error-message">Expected invalid credentials but received network error</div>
+    <pre class="stacktrace">at com.example.LoginTest.invalidCredentials(LoginTest.kt:42)</pre>
+  </article>
+
+  <article class="test-result failed">
+    <h3 class="test-name">com.example.PaymentTest.timesOut</h3>
+    <div class="error-message">Payment gateway timed out</div>
+    <pre class="stacktrace">at com.example.PaymentTest.timesOut(PaymentTest.kt:87)</pre>
+  </article>
+</body>
+</html>
